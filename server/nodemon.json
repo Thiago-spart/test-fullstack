@@ -1,0 +1,10 @@
+{
+	"watch": [
+		"src"
+	],
+	"ext": "js,ts",
+	"ignore": [
+		"src/**/*.spec.ts"
+	],
+	"exec": "concurrently \"npx tsc --watch\" \"ts-node src/index.ts\""
+}
