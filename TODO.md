@@ -10,16 +10,29 @@ Criar um novo cliente
 
 Criar uma API que ofereça endpoints para:
 
-- [] Obter a listagem de clientes cadastrados.
-- [] Cadastrar um novo cliente com informações válidas.
-- [] Atualizar informações de cliente existente.
-- [] Armazenar os dados do cliente de forma persistente, com sugestão de uso do SQLite para essa finalidade.
+- [x] Obter a listagem de clientes cadastrados.
+- [x] Cadastrar um novo cliente com informações válidas.
+- [x] Atualizar informações de cliente existente.
+- [x] Armazenar os dados do cliente de forma persistente, com sugestão de uso do SQLite para essa finalidade.
+- [x] Excluir um cliente.
+- [x] Atualizar o status de um cliente.
+- [x] Buscar um cliente pelo ID.
+- [x] Adicionar mensagem padrão para back-end
+- [ ] Adicionar login
+- [ ] Adicionar search e filtro em clientes
+- [ ] Adicionar paginação em clientes
+- [ ] Globalizar acesso ao Banco de dados
+- [ ] Proibir injeção de SQL
+- [ ] Dividir arquivos de rotas em rotas menores
+- [ ] Testar rotas e conexões
+- [ ] Adicionar eslint e prettier
+- [ ] Adicionar tipagem nas rotas e retorno delas
 
 ### Tecnologias back
 
-- [] Node.js
-- [] Express
-- [] SQLite
+- [x] Node.js
+- [x] Express
+- [x] SQLite
 
 #### Testes server
 
@@ -28,6 +41,7 @@ Criar uma API que ofereça endpoints para:
 
 ## client
 
+- [] Configuração inicial do projeto
 - [] Tela para listagem de clientes
 - [] Tela para edição e criação de clientes
 - [] Na tela de edição, fornecer alertas para o usuário em caso de dados inválidos.
@@ -50,6 +64,14 @@ Criar uma API que ofereça endpoints para:
 - [] Testes com RTL
 
 ## Requisitos de Qualidade de Código
+
+- [ ] Documentação geral do projeto, explicações e práticas de desenvolvimento.
+
+Documentação para iniciar projeto:
+
+- [ ] Inicialização do banco de dados
+- [ ] Instalação das dependências
+- [ ] Documentação no postman de todas as rotas e entidades do banco de dados
 
 Escreva um código limpo, legível e bem organizado.
 Adote boas práticas de desenvolvimento e arquitetura.
