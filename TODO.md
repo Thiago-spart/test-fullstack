@@ -41,18 +41,20 @@ Criar uma API que ofereça endpoints para:
 
 ## client
 
-- [] Configuração inicial do projeto
-- [] Tela para listagem de clientes
+- [x] Configuração inicial do projeto
+- [x] Tela para listagem de clientes
+- [x] Validação de dados repetidos cliente
+- [] Validação de cpf e documento seguindo diretrizes do governo
 - [] Tela para edição e criação de clientes
 - [] Na tela de edição, fornecer alertas para o usuário em caso de dados inválidos.
 - [] Realizar validação de CPF e telefone na tela de edição para garantir dados corretos e consistentes.
 
 ### Tecnologias front
 
-- [] React
-- [] TypeScript
-- [] Next.js
-- [] Tailwind + DaisyUI
+- [x] React
+- [x] TypeScript
+- [x] Next.js
+- [x] Tailwind + DaisyUIx
 
 #### Testes front
 

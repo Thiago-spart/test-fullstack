@@ -15,3 +15,17 @@ Após ter minha primeira rota rodando e sendo testada com postman, parti para a 
 Agora que meu back-end está minimamente configurado para o primário do teste, posso começar o desenvolvimento do front-end.
 
 Para esse projeto eu decidi utiliza next.js, sei que é uma tecnologia poderosa, mas a irei usar mais focado na sua simplicidade de configurações, performance e segurança.
+
+Iniciei a configuração e instalação do next.js e suas dependências focando em entregar as funcionalidades básicas da aplicação.
+
+Instalei e configurei meu app buscando recursos da uol, como a font, cores, favicon e svgs.
+
+Na criação da tela inicial, comecei imaginando uma versão onde se encaixaria em mobile-first, tendo que pensar primeiramente na aplicação com 280px até chegar na altura da imagem de exemplo (cerca de 1536px).
+
+Durante a integração do back, tive problemas com o CORS onde tive que configurar o back para aceitar o CORS na rota teste do client(localhost:3000).
+
+Após criar boa parte do que seria padrão das rotas, como header, body title e boa parte dos designs seguindo uma relação muito lógica e bem organizada. Segui para a página de de criação/edição onde pude reaproveitar boa parte dos designs e otimizar grande parte da tela para ser server component oferecendo mais performance.
+
+Na criação dos inputs optei por usar o [react-hook-form](https://react-hook-form.com/) para facilitar a criação de formulários e otimizar o uso de validações, junto com [yup](https://github.com/jquense/yup) para validações mais complexas.
+
+Agora que o principal está concluído, irei partir para a atualização do dos clientes.
