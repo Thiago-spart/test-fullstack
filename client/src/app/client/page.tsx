@@ -12,9 +12,12 @@ import { documentMask } from "@/utils/documentMask";
 import { toast } from "react-toastify";
 import { ValidateDTO } from "@/DTO/validate";
 import { phoneMask } from "@/utils/phoneMask";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { unmaskInputs } from "@/utils/unmask";
-import { useRouter } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
+import { ClientDTO } from "@/DTO/clients";
+import React from "react";
+import { queryClient } from "@/services/queryClient";
 
 const statusOptions = [
   { value: "active", label: "Ativo" },
@@ -53,14 +56,42 @@ const fetchCreateClient = async (data: FormData) => {
 	return response
 }
 
-export default function Page() {
-	const router = useRouter();
-	
-	const { register, handleSubmit, formState: { errors } } = useForm<FormData>({
-		resolver: yupResolver(schema),
-	});
+const fetchUpdateClient = async ({ id, ...data }: FormData & { id: number }) => {
+	const response = uolApi.put('/clients/update', {
+		...data,
+		id
+	})
 
-	const { mutate } = useMutation({
+	return response
+}
+
+const fetchClient = async (id: number) => {
+	const response = uolApi.get<Array<ClientDTO>>(`/clients`, {
+		params: {
+			id
+		}
+	})
+
+	const { data } = await response;
+	
+	return data[0]
+}
+
+export default function Page() {
+	const params = useSearchParams();
+	const router = useRouter();
+
+	const userId = params.get("id");
+
+	const { register, handleSubmit, setValue, formState: { errors } } = useForm<FormData>({
+		resolver: yupResolver(schema),
+	}); 
+
+	queryClient.refetchQueries({
+    queryKey: ["clients"],
+  });
+
+	const createMutation = useMutation({
 		mutationFn: fetchCreateClient,
 		onSuccess: () => {
 			toast.success("Cliente criado com sucesso!", {
@@ -76,16 +107,60 @@ export default function Page() {
 		}
 	})
 
+	const clientQuery = useQuery({
+		queryKey: ["client", userId],
+		queryFn: () => fetchClient(Number(userId)),
+		enabled: !!userId,
+		refetchOnMount: true,
+		refetchOnWindowFocus: true,
+		refetchOnReconnect: true,
+	})
+
+	const updateMutation = useMutation({
+		mutationFn: fetchUpdateClient,
+		onSuccess: () => {
+			toast.success("Cliente atualizado com sucesso!", {
+				toastId: "update-client-toast",
+			});
+
+			router.push("/");
+			
+			queryClient.removeQueries({
+				queryKey: ["client", userId],
+			});
+		},
+		onError: () => {
+			toast.error("Erro ao atualizar o cliente!", {
+				toastId: "update-client-toast",
+			});
+		}
+	})
+
 	const onSubmit = (data: FormData) => {
 		const { name, email, telephone, document, status } = data;
 
-		mutate({
+		if (userId) {
+			updateMutation.mutate({
+				id: Number(userId),
+				name,
+				email,
+				telephone: unmaskInputs(telephone),
+				document: unmaskInputs(document),
+				status
+			})
+
+			return
+		}
+
+		createMutation.mutate({
 			name,
 			email,
 			telephone: unmaskInputs(telephone),
 			document: unmaskInputs(document),
 			status
 		})
+
+
 	};
 
 
@@ -106,6 +181,18 @@ export default function Page() {
 			toastId: "email-toast",
 		});
 	}
+
+	React.useEffect(() => {
+		if (!!userId || clientQuery.isSuccess) {
+			if (clientQuery?.data) {
+				setValue("name", clientQuery.data?.name);
+				setValue("email", clientQuery.data?.email);
+				setValue("telephone", clientQuery.data?.telephone);
+				setValue("document", clientQuery.data?.document);
+				setValue("status", clientQuery.data?.status);
+			}
+		}
+	}, [userId, clientQuery]);
 
   return (
     <form 
@@ -181,7 +268,7 @@ export default function Page() {
 
       <div className="grid md:grid-cols-2 items-center gap-4 w-full max-w-xs mt-12">
         <button type="submit" className="btn btn-primary w-full">
-          Criar
+          {!!userId ? "Atualizar" : "Criar"}
         </button>
         <Link href="/" className="btn btn-primary btn-outline">
           Voltar

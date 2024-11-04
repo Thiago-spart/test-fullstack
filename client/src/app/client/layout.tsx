@@ -1,3 +1,10 @@
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cliente | UOL - Seu universo online",
+  description: "Crie ou editar seus clientes na UOL.",
+};
+
 export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<main className="flex min-h-screen flex-col items-center p-8 md:p-24 gap-8">

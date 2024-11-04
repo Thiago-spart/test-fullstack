@@ -2,8 +2,6 @@ import Link from "next/link";
 import { ClientCardProps } from "./types";
 import { statusTranslate } from "@/utils/statusTranslate";
 import clsx from "clsx";
-import { phoneMask } from "@/utils/phoneMask";
-import { documentMask } from "@/utils/documentMask";
 
 export const ClientCard = ({
 	status,
@@ -45,7 +43,10 @@ export const ClientCard = ({
 				<span>{translatedStatus?.text}</span>
 			</p>
 
-			<Link href={`/client?id=${id}`} className="btn btn-outline btn-primary w-fit lg:justify-self-end">
+			<Link href={{
+				pathname: "/client",
+				query: { id: id }
+			}} className="btn btn-outline btn-primary w-fit lg:justify-self-end">
 				Editar
 			</Link>
 		</div>

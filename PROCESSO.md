@@ -29,3 +29,9 @@ Após criar boa parte do que seria padrão das rotas, como header, body title e 
 Na criação dos inputs optei por usar o [react-hook-form](https://react-hook-form.com/) para facilitar a criação de formulários e otimizar o uso de validações, junto com [yup](https://github.com/jquense/yup) para validações mais complexas.
 
 Agora que o principal está concluído, irei partir para a atualização do dos clientes.
+
+Para validar números no front utilizei essa função como referência em validação de números telefónicos no Brasil.
+
+Utilizei a tela de criação para a edição também, como também melhorei a manipulação das queries revalidando e deletando elas quando não utilizadas pelo usuário.
+
+As máscaras de inputs que criei são adicionadas quando o usuário edita um dado mas são deletadas quando enviadas pelo back para seguir a padronização sem caracteres especiais.
