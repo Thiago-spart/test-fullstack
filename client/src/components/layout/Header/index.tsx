@@ -10,6 +10,7 @@ export const Header = () => {
 					alt="UOL logo"
 					width={100}
 					height={50}
+					className="w-24"
 				/>
 			</Link>
 		</div>

@@ -47,6 +47,7 @@ Criar uma API que ofereça endpoints para:
 - [x] Tela para edição e criação de clientes
 - [x] Na tela de edição, fornecer alertas para o usuário em caso de dados inválidos.
 - [x] Realizar validação de CPF e telefone na tela de edição para garantir dados corretos e consistentes.
+- [x] Adicionar botão para deletar o usuário.
 
 ### Tecnologias front
 

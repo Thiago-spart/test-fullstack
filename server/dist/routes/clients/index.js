@@ -79,7 +79,7 @@ exports.clientsRouter.put('/clients/update', async (req, res) => {
 exports.clientsRouter.delete('/clients/delete', async (req, res) => {
     try {
         const dbConnection = await db;
-        const { id } = req.body;
+        const { id } = req.query;
         if (!id) {
             return res.status(400).json({ error: 'id é obrigatório' });
         }

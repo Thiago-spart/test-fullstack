@@ -1,7 +1,26 @@
+'use client';
+
 import Link from "next/link";
 import { ClientCardProps } from "./types";
 import { statusTranslate } from "@/utils/statusTranslate";
 import clsx from "clsx";
+import { uolApi } from "@/services/uolApi";
+import { toast } from "react-toastify";
+import { queryClient } from "@/services/queryClient";
+
+const fetchDeleteClient = async (clientId: string) => {
+	const req = await uolApi.delete(`/clients/delete`, {
+		params: {
+			id: clientId
+		}
+	}).then(res => res.data)
+	.finally(() => {
+		toast.success('Cliente excluído com sucesso!')
+		queryClient.refetchQueries({ queryKey: ['clients'] })
+	})
+
+	return req
+}
 
 export const ClientCard = ({
 	status,
@@ -12,6 +31,10 @@ export const ClientCard = ({
 	id
 }: ClientCardProps) => {
 	const translatedStatus = statusTranslate(status);
+
+	const handleDeleteClient = (clientId: string) => {
+		fetchDeleteClient(clientId)
+	}
 
 	const badgeClassName = clsx(
 		`badge badge-xs badge-primary mr-1`,
@@ -43,12 +66,17 @@ export const ClientCard = ({
 				<span>{translatedStatus?.text}</span>
 			</p>
 
-			<Link href={{
-				pathname: "/client",
-				query: { id: id }
-			}} className="btn btn-outline btn-primary w-fit lg:justify-self-end">
-				Editar
-			</Link>
+			<div className="w-fit lg:justify-self-end flex flex-col md:flex-row items-center gap-4">
+				<button onClick={() => handleDeleteClient(id.toString())} className="btn btn-outline btn-error" type="button">
+					Deletar
+				</button>
+				<Link href={{
+					pathname: "/client",
+					query: { id }
+				}} className="btn btn-outline btn-primary">
+					Editar
+				</Link>
+			</div>
 		</div>
 	);
 };

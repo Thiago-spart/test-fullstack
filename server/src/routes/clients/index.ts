@@ -96,7 +96,7 @@ clientsRouter.put('/clients/update', async (req: Request, res: Response): Promis
 clientsRouter.delete('/clients/delete', async (req: Request, res: Response): Promise<any> => {
   try {
     const dbConnection = await db
-    const { id } = req.body;
+    const { id } = req.query;
 
     if (!id) {
       return res.status(400).json({ error: 'id é obrigatório' });

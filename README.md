@@ -1,41 +1,75 @@
-# Teste Fullstack: Aplicativo de Gerenciamento de Clientes
+# Uol full-stack challenge
 
-## Descrição:
+## Dependências
 
-Neste desafio, você deverá desenvolver um aplicativo fullstack que permita aos usuários visualizar e criar clientes. O aplicativo consiste em duas partes: o frontend e o backend. O frontend será responsável pela interface do usuário e a comunicação com a API. O backend será responsável pelo armazenamento e gerenciamento dos dados dos clientes.
+- [x] Node.js v21.7.3
+- [x] NPM
+- [x] MySQL Server
 
-## Requisitos do Frontend:
+### Banco de dados
 
-1. Exibir uma listagem de clientes contendo todas as informações conforme o layout fornecido.
-2. Permitir a criação de um novo cliente através de um formulário.
-3. Na tela de edição, fornecer alertas para o usuário em caso de dados inválidos.
-4. Realizar validação de CPF e telefone na tela de edição para garantir dados corretos e consistentes.
-5. Comunicar-se com a API para obter os dados dos clientes cadastrados.
+Para esse teste foi utilizado MySQL server.
 
-## Requisitos do Backend:
+Para instalar o MySQL server, basta seguir o [manual](https://dev.mysql.com/downloads/installer/) ou pesquisar seu sistema operacional.
 
-Criar uma API que ofereça endpoints para:
+Para pegar o server que utilizei você pode baixa-lo no arquivo [db-backup](db-backup.zip)
 
-1. Obter a listagem de clientes cadastrados.
-2. Cadastrar um novo cliente com informações válidas.
-3. Atualizar informações de cliente existente.
-4. Armazenar os dados do cliente de forma persistente, com sugestão de uso do SQLite para essa finalidade.
+### Server
 
-## Requisitos de Qualidade de Código:
+Para iniciar o back-end, primeiramente temos que baixar as dependências:
 
-Escreva um código limpo, legível e bem organizado.
-Adote boas práticas de desenvolvimento e arquitetura.
+```bash
+npm run i
+```
 
-## Itens Desejáveis (opcional):
+após a instalação você pode iniciar o servidor teste:
 
-- Testes unitários
-- Bibliotecas ou frameworks adicionais
+```bash
+npm run dev
+```
 
-## Telas:
+Nota: Eu coloquei o servidor para iniciar na rota 3001. <http://localhost:3001>
 
-- [Tela Inicial](https://test-frontend-uolpp.web.app/assets/images/tela-inicial.jpg)
-- [Tela de Edição](https://test-frontend-uolpp.web.app/assets/images/tela-edicao.jpg)
+#### Build server
 
-## Instruções Finais:
+Para fazer build utilize o seguinte comando:
 
-Após concluir o desafio, crie um pull request neste repositório com duas pastas separadas: uma contendo o projeto frontend e outra com o projeto backend, para que possamos avaliar seu trabalho. Boa sorte!
+```bash
+npm run build
+```
+
+Para iniciar o servidor de produção utilize o seguinte comando:
+
+```bash
+npm run start
+```
+
+### Frontend
+
+Para iniciar o frontend, primeiramente temos que baixar as dependências:
+
+```bash
+npm run i
+```
+
+após a instalação é preciso iniciar o servidor:
+
+```bash
+npm run dev
+```
+
+Nota: Eu coloquei o servidor para iniciar na rota 3000. <http://localhost:3000>
+
+#### Build client
+
+Para fazer build utilize o seguinte comando:
+
+```bash
+npm run build
+```
+
+Para iniciar o servidor de produção utilize o seguinte comando:
+
+```bash
+npm run start
+```

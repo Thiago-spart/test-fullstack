@@ -1,6 +1,6 @@
 'use client';
 
-import { ClientCard } from "@/components";
+import { ClientCard, SkeletonList } from "@/components";
 import { ClientDTO } from "@/DTO/clients";
 import { uolApi } from "@/services/uolApi";
 import { useQuery } from "@tanstack/react-query";
@@ -13,7 +13,7 @@ const fetchClients = async (): Promise<ClientDTO[]> => {
 };
 
 export default function Home() {
-  const { data } = useQuery({
+  const { data, isSuccess } = useQuery({
     queryKey: ["clients"],
     queryFn: fetchClients,
     refetchOnMount: true,
@@ -57,17 +57,21 @@ export default function Home() {
         </div>
 
         <div className="w-full flex flex-col gap-8">
-          {data?.map((client) => (
-            <ClientCard
-              key={client.id}
-              status={client.status}
-              name={client.name}
-              email={client.email}
-              document={client.document}
-              telephone={client.telephone}
-              id={client.id}
-            />
-          ))}
+          {isSuccess ? 
+            data?.map((client) => (
+              <ClientCard
+                key={client.id}
+                status={client.status}
+                name={client.name}
+                email={client.email}
+                document={client.document}
+                telephone={client.telephone}
+                id={client.id}
+              />
+            ))
+           : (
+              <SkeletonList />
+          )}
         </div>
 
         <span className="text-gray-500 font-light w-full">Exibindo {data?.length} clientes</span>
