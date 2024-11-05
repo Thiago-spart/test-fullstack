@@ -2,6 +2,7 @@
 logs
 *.log
 
+
 #Ignore node modules
 */node_modules/
 
@@ -26,3 +27,7 @@ Thumbs.db
 package-lock.json
 yarn.lock
 
+#Server tests
+coverage
+__test__
+dist

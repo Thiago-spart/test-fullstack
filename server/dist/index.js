@@ -19,3 +19,4 @@ app.use('/', index_1.default);
 app.listen(port, () => {
     console.log('Server started on port 3001');
 });
+exports.default = app;
