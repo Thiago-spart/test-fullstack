@@ -1,4 +1,5 @@
 import { Metadata } from "next";
+import { Suspense } from "react";
 
 export const metadata: Metadata = {
   title: "Cliente | UOL - Seu universo online",
@@ -37,7 +38,9 @@ export default function Layout({ children }: { children: React.ReactNode }) {
           </div>
         </div>
 
-        {children}
+        <Suspense>
+          {children}
+        </Suspense>
       </section>
     </main>
 	);

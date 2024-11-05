@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-var
+
 export function validatePhone(telefone: string) {
 	telefone = telefone.replace(/\D/g, '');
 

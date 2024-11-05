@@ -16,7 +16,7 @@ import { useMutation, useQuery } from "@tanstack/react-query";
 import { unmaskInputs } from "@/utils/unmask";
 import { useRouter, useSearchParams } from "next/navigation";
 import { ClientDTO } from "@/DTO/clients";
-import React from "react";
+import React, { Suspense } from "react";
 import { queryClient } from "@/services/queryClient";
 
 const statusOptions = [
@@ -195,85 +195,87 @@ export default function Page() {
 	}, [userId, clientQuery]);
 
   return (
-    <form 
-			className="w-full max-w-7xl flex gap-6 flex-col py-8"
-			onSubmit={handleSubmit(onSubmit)}
-		>
-      <Input
-        id="name"
-        labelMessage="Nome"
-        placeholder="Nome"
-        autoComplete="name"
-				errorMessage={errors?.name?.message}
-				{...register('name')}
-      />
+		<Suspense fallback={<div>Loading...</div>}>
+			<form 
+				className="w-full max-w-7xl flex gap-6 flex-col py-8"
+				onSubmit={handleSubmit(onSubmit)}
+			>
+				<Input
+					id="name"
+					labelMessage="Nome"
+					placeholder="Nome"
+					autoComplete="name"
+					errorMessage={errors?.name?.message}
+					{...register('name')}
+				/>
 
-      <Input
-				id="email"
-				type="email"
-				inputMode="email"
-				placeholder="E-mail"
-				autoComplete="email"
-				labelMessage="E-mail"
-				errorMessage={errors?.email?.message}
-				{...register('email', {
-					onBlur: (e) => {
-						validateEmailOnBlur(e.target.value);
-					}
-				})}
-			/>
+				<Input
+					id="email"
+					type="email"
+					inputMode="email"
+					placeholder="E-mail"
+					autoComplete="email"
+					labelMessage="E-mail"
+					errorMessage={errors?.email?.message}
+					{...register('email', {
+						onBlur: (e) => {
+							validateEmailOnBlur(e.target.value);
+						}
+					})}
+				/>
 
-      <Input
-				id="cpf"
-				placeholder="CPF"
-				autoComplete="cpf"
-				labelMessage="Digite o seu cpf"
-				maxLength={14}
-				inputMode="numeric"
-				errorMessage={errors?.document?.message}
-				{...register('document', {
-					onChange: (e) => {
-						e.target.value = documentMask(e);
-					},
-					onBlur: (e) => {
-						validateDocumentOnBlur(e.target.value);
-					},
-				})}
-			/>
+				<Input
+					id="cpf"
+					placeholder="CPF"
+					autoComplete="cpf"
+					labelMessage="Digite o seu cpf"
+					maxLength={14}
+					inputMode="numeric"
+					errorMessage={errors?.document?.message}
+					{...register('document', {
+						onChange: (e) => {
+							e.target.value = documentMask(e);
+						},
+						onBlur: (e) => {
+							validateDocumentOnBlur(e.target.value);
+						},
+					})}
+				/>
 
-      <Input
-				id="telephone"
-				type="tel"
-				maxLength={15}
-				placeholder="Telefone"
-				labelMessage="Telefone"
-				inputMode="numeric"
-				autoComplete="tel"
-				errorMessage={errors?.telephone?.message}
-				{...(register('telephone', {
-					onChange: (e) => {
-						e.target.value = phoneMask(e);
-					},
-				}))}
-			/>
+				<Input
+					id="telephone"
+					type="tel"
+					maxLength={15}
+					placeholder="Telefone"
+					labelMessage="Telefone"
+					inputMode="numeric"
+					autoComplete="tel"
+					errorMessage={errors?.telephone?.message}
+					{...(register('telephone', {
+						onChange: (e) => {
+							e.target.value = phoneMask(e);
+						},
+					}))}
+				/>
 
-      <Select
-        id="status"
-        labelMessage="Status"
-        options={statusOptions}
-        selectDefaultValue="active"
-				errorMessage={errors?.status?.message}
-				{...register('status')}
-      />
+				<Select
+					id="status"
+					labelMessage="Status"
+					options={statusOptions}
+					selectDefaultValue="active"
+					errorMessage={errors?.status?.message}
+					{...register('status')}
+				/>
 
-      <div className="grid md:grid-cols-2 items-center gap-4 w-full max-w-xs mt-12">
-        <button type="submit" className="btn btn-primary w-full">
-          {!!userId ? "Atualizar" : "Criar"}
-        </button>
-        <Link href="/" className="btn btn-primary btn-outline">
-          Voltar
-        </Link>
-      </div>
-    </form>
+				<div className="grid md:grid-cols-2 items-center gap-4 w-full max-w-xs mt-12">
+					<button type="submit" className="btn btn-primary w-full">
+						{!!userId ? "Atualizar" : "Criar"}
+					</button>
+					<Link href="/" className="btn btn-primary btn-outline">
+						Voltar
+					</Link>
+				</div>
+			</form>
+		</Suspense>
   );
 }

@@ -35,3 +35,7 @@ Para validar números no front utilizei essa função como referência em valida
 Utilizei a tela de criação para a edição também, como também melhorei a manipulação das queries revalidando e deletando elas quando não utilizadas pelo usuário.
 
 As máscaras de inputs que criei são adicionadas quando o usuário edita um dado mas são deletadas quando enviadas pelo back para seguir a padronização sem caracteres especiais.
+
+Adicionei a opção de deletar usuários, eu iria adicionar um modal para confirmação, mas foquei em terminar o fluxo principal da aplicação e fazer que aconteça de forma perfeita.
+
+Adicionei testes de rotas mais simples no servidor, eu parei os testes por enquanto pois seria necessário um banco de dados teste para o servidor.

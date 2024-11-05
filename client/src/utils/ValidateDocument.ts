@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-var
+
 export function validateDocument(document: string) {
 	document = document.replace(/\D/g, '');
 	if(document.toString().length != 11 || /^(\d)\1{10}$/.test(document)) return false;
